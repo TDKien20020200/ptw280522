@@ -1,5 +1,42 @@
+<style>
+  .smt{
+    display: flex;
+  }
+  .smt1 {
+    flex: 5;
+  }
+  .smt2 {
+    flex: 1;
+  }
+  .button {
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display:block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  .button1 {background-color: #3ed8dd;} /* Green */
+  .button2 {background-color: #008CBA;} /* Sky */
+  .button3 {background-color: #3200ba;} /* Blue */
+</style>
 <div class="mt-4">
-    <h3>Danh sách các cơ sở</h3>
+    <div class="smt">
+      <div class="smt1">
+          <h2>Danh sách các cơ sở</h2>
+      </div>
+      
+      <div class="smt2">      
+        <button class="button button1">
+          <a href="/stores/create" style="color: white;">Tạo cơ sở mới</a>
+        </button>
+      </div>
+    </div>
+    
 
     <table class="table mt-4">
         <thead>

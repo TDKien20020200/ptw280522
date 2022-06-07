@@ -41,10 +41,6 @@ class StoreController {
         const event1 = Date.now();
         const event2 = new Date(dated);
 
-        console.log(event1);
-        console.log(event2);
-        console.log(event1 < event2);
-
         if (issue == '') {
             typei = 'Chưa có/Đã bị thu hồi';
             prio = 3;
@@ -249,7 +245,6 @@ class StoreController {
     
     // [PUT] /stores/:id/afterexamine
     afterexamine(req, res, next) {
-        console.log(req.body);
         Store.updateOne({ _id: req.params.id }, req.body)
         Store.updateOne({ _id: req.params.id }, {status: 'Đã'})
             .then(() => {
