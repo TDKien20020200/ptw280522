@@ -30,27 +30,55 @@ class StoreController {
         var prio;
         var tt = d.getDate() + ' ' + month + ' năm ' + d.getFullYear();
         var tas;
-        const event = Date.now();
+        var infr;
+        var serv;
+        var hygi;
+        var envi;
+        var insp;
+        var resu;
+        var conc;
+        var infri;
+        const event1 = Date.now();
+        const event2 = new Date(dated);
+
+        console.log(event1);
+        console.log(event2);
+        console.log(event1 < event2);
+
         if (issue == '') {
             typei = 'Chưa có/Đã bị thu hồi';
             prio = 3;
         } 
-        else if (issue != null) {
-            if (event > dated) {
+        else {
+            if (event1 > event2) {
                 typei = 'Đã hết hạn sử dụng';
                 prio = 2;
-            } else if (event <= dated) {
+            } else if (event1 <= event2) {
                 typei = 'Còn sử dụng được';
                 prio = 1;
-                tas = 'Rất tốt'
+                tas = 'Rất tốt';
+                infr= 'Rất tốt';
+                serv= 'Rất tốt';
+                hygi= 'Rất tốt';
+                envi= 'Rất tốt';
+                insp= 'RED';
+                resu='Rất tốt';
+                conc= 'Đủ điều kiện';
+                infri='Không có vi phạm';
             }
         }
 
         const typeissue = typei;
         const priority = prio;
-        const testtime = tt;
-
-        console.log(tt);
+        const testtimedmy = tt;
+        const infrastructure= infr;
+        const service= serv;
+        const hygiene= hygi;
+        const environment= envi;
+        const inspectionunit= insp;
+        const result= resu;
+        const conclusion= conc;
+        const infringe= infri;
 
         const store = new Store({
             name: name,
@@ -64,16 +92,18 @@ class StoreController {
             created: created,
             dated: dated,
             priority: priority,
-            testtime: testtime,
-            infrastructure: 'Rất tốt',
-            service: 'Rất tốt',
-            hygiene: 'Rất tốt',
-            environment: 'Rất tốt',
-            inspectionunit: 'RED',
-            result: 'Rất tốt',
-            conclusion: 'Đủ điều kiện',
-            infringe: 'Không có vi phạm'
+            testtimedmy: testtimedmy,
+            infrastructure: infrastructure,
+            service: service,
+            hygiene: hygiene,
+            environment: environment,
+            inspectionunit: inspectionunit,
+            result: result,
+            conclusion: conclusion,
+            infringe: infringe
         });
+
+        console.log(store);
 
         store
             .save()
@@ -97,14 +127,26 @@ class StoreController {
                             store: mongooseToObject(store)
                         }) 
                     } else {
-                        res.render('stores/detailout', { 
-                            store: mongooseToObject(store)
-                        }) 
+                        if (store.status == 'Đã') {
+                            res.render('stores/detailoutexam', { 
+                                store: mongooseToObject(store)
+                            }) 
+                        } else {                            
+                            res.render('stores/detailout', { 
+                                store: mongooseToObject(store)
+                            }) 
+                        }
                     }
                 } else {
-                    res.render('stores/detailno', { 
-                        store: mongooseToObject(store)
-                    }) 
+                    if (store.status == 'Đã') {
+                        res.render('stores/detailnoexam', { 
+                            store: mongooseToObject(store)
+                        }) 
+                    } else {                            
+                        res.render('stores/detailno', { 
+                            store: mongooseToObject(store)
+                        })  
+                    }
                 }      
             })
             .catch(next);
@@ -207,8 +249,12 @@ class StoreController {
     
     // [PUT] /stores/:id/afterexamine
     afterexamine(req, res, next) {
+        console.log(req.body);
         Store.updateOne({ _id: req.params.id }, req.body)
-            .then(() => res.redirect('/list/stored/stores'))
+        Store.updateOne({ _id: req.params.id }, {status: 'Đã'})
+            .then(() => {
+                res.redirect('/plan/stored/plans')
+            })
             .catch(next);
     }
 

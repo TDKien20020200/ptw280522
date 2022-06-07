@@ -1,0 +1,90 @@
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+<div class='mt-4'>
+    <h2>Chi tiết cơ sở {{store.name}}</h2>
+
+    <table>
+      <tr>
+        <th>Tên cơ sở</th>
+        <td>{{store.name}}</td>
+      </tr>
+      <tr>
+        <th>Địa chỉ</th>  
+        <td>{{store.address}}, {{store.ward}}, {{store.district}}</td>      
+      </tr>  
+      <tr>
+        <th>Số điện thoại</th>
+        <td>{{store.phonenumber}}</td>
+      </tr>
+      <tr>
+        <th>Kiểu cơ sở</th>
+        <td>{{store.typestore}}</td>
+      </tr>
+    </table>
+
+    <div class="mt-4">
+      <h2>Chứng nhận cơ sở đạt chuẩn (đã hết hạn sử dụng)</h2>
+
+      <table>
+        <tr>
+          <th>Số giấy</th>
+          <td>{{store.issue}}</td>
+        </tr>
+        <tr>
+          <th>Ngày cấp</th>
+          <td>{{store.created}}</td>
+        </tr>
+        <tr>
+          <th>Hạn sử dụng đến</th>
+          <td>{{store.dated}}</td>
+        </tr>
+      </table>
+
+      {{!-- <button type="button" class="btn btn-secondary">
+        <a  href="/stores/{{store._id}}/getnew">Cấp mới giấy chứng nhận</a>            
+      </button> --}}
+
+      <button type="button" class="btn btn-danger" style="margin-top: 10px;">
+        <a  href="/stores/{{store._id}}/takeback">Thu hồi giấy chứng nhận</a>            
+      </button>
+
+      <button type="button" class="btn btn-secondary" style="margin-top: 10px;">
+        <a  href="/stores/{{store._id}}/print">In kết quả</a>            
+      </button>
+    </div>
+
+    <div class="mt-4">
+        <h2>Hoạt động thanh, kiểm tra</h2>
+
+        <h3>Cơ sở đã được thanh, kiểm tra vào ngày {{store.testtimedmy}}</h3>
+        <h3>Quá trình thanh, kiểm tra:</h3> 
+        <ol style="font-size: 25px;">        
+            <li>
+            <h4>Kiểm tra tại cơ sở:</h4>
+            <ul style="font-size: 20px;">
+                <li><b>Chất lượng cơ sở vật chất: {{store.infrastructure}}</b></li>
+                <li><b>Chất lượng phục vụ: {{store.service}}</b></li>
+                <li><b>Vệ sinh cơ sở: {{store.hygiene}}</b></li>
+                <li><b>Vệ sinh môi trường xung quanh: {{store.environment}}</b></li>
+            </ul>
+            </li>
+            <li>
+            <h4>Lấy mẫu thực phẩm và thực hiện kiểm định:</h4>
+            <ul style="font-size: 20px;">
+                <li><b>Thẩm định tại Trung tâm: {{store.inspectionunit}}</b></li>
+                <li><b>Kết quả thẩm định: {{store.result}}</b></li>
+            </ul>
+            </li>
+            <li>
+            <h4>Kết luận về kết quả thanh kiểm tra: <b>{{store.conclusion}}</b></h4>
+            </li>
+            <li>
+            <h4>Quyết định xử lý vi phạm: <b>{{store.infringe}}</b></h4>
+            </li>
+        </ol>
+    </div>
+
+</div>

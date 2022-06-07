@@ -51,6 +51,9 @@ const StoreSchema = new Schema({
 	},
 	testtime: {
 		type: String,
+	},
+	testtimedmy: {
+		type: String,
 		// 03 tháng 8 năm 2020
 	},
 	priority: {

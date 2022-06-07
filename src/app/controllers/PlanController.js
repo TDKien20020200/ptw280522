@@ -7,6 +7,8 @@ class PlanController {
     storedPlans(req, res, next) {
         let planQuery = Store.find({ status: 'Đã'});
 
+        // console.log(planQuery);
+
         if (req.query.hasOwnProperty('_sort')) {
             const isValidType = ['asc', 'desc'].includes(req.query.type);
 
